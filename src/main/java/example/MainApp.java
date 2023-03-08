@@ -1,11 +1,18 @@
 package example;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+//import com.fasterxml.jackson.jaxrs.json.JacksonJaxbJsonProvider;
 import example.config.*;
 import example.controller.*;
+import jakarta.ws.rs.ext.MessageBodyReader;
+import jakarta.ws.rs.ext.MessageBodyWriter;
 import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
+import org.glassfish.jersey.message.GZipEncoder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
+import org.glassfish.jersey.server.filter.EncodingFilter;
 import org.glassfish.jersey.server.mvc.freemarker.FreemarkerMvcFeature;
 import org.glassfish.jersey.server.mvc.jsp.JspMvcFeature;
 
@@ -19,6 +26,12 @@ public class MainApp extends ResourceConfig {
 
     // we start at port 8080
     public static final String BASE_URI = "http://localhost:8080/";
+
+//    // create custom ObjectMapper
+//    public final static ObjectMapper mapper = new ObjectMapper();
+//    static {
+//        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+//    }
 
     // Starts Grizzly HTTP server
     public static HttpServer startServer() {
@@ -34,8 +47,16 @@ public class MainApp extends ResourceConfig {
         config.property(FreemarkerMvcFeature.TEMPLATE_BASE_PATH, "templates/jsp");
         config.register(FreemarkerMvcFeature.class);
         LOGGER.info(">>>JspMvcFeature<<<");
-        config.register(MyController.class);
-//        EncodingFilter.enableFor(config, GZipEncoder.class);
+        config.register(WebController.class);
+        config.register(StatesController.class);
+
+//        // create JsonProvider to provide custom ObjectMapper
+//        JacksonJaxbJsonProvider provider = new JacksonJaxbJsonProvider();
+//        provider.setMapper(mapper);
+//        config.register(provider);
+
+//        config.register(CustomJsonProvider.class, MessageBodyReader.class, MessageBodyWriter.class);
+        EncodingFilter.enableFor(config, GZipEncoder.class);
 
 
 

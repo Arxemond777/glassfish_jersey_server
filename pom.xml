@@ -56,6 +56,11 @@
             <artifactId>jersey-mvc-freemarker</artifactId>
             <version>${jersey.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-json</artifactId>
+            <version>1.8</version>
+        </dependency>
 
         <dependency>
             <groupId>org.glassfish.jaxb</groupId>
@@ -63,18 +68,31 @@
             <version>${jersey.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.14.2</version>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.fasterxml.jackson.jaxrs</groupId>-->
+<!--            <artifactId>jackson-jaxrs-json-provider</artifactId>-->
+<!--            <version>2.1.4</version>-->
+<!--        </dependency>-->
+
         <!-- Jersey related and HK2 dependency injection -->
         <dependency>
             <groupId>org.glassfish.jersey.inject</groupId>
             <artifactId>jersey-hk2</artifactId>
         </dependency>
 
-        <!-- add jackson for json conversion
+        <!-- add jackson for json conversion -->
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
             <artifactId>jersey-media-json-jackson</artifactId>
+            <scope>runtime</scope>
         </dependency>
-        -->
+
 
         <!-- generates the META-INF/hk2-locator/default files for auto scan and discovery -->
         <dependency>
