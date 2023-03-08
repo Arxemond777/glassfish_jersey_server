@@ -27,8 +27,10 @@ public class MainApp extends ResourceConfig {
         final ResourceConfig config = new ResourceConfig();
         config.packages(true, "example"); // package
         config.property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
+        // https://riptutorial.com/jersey/example/30679/jersey-mvc-hello-world
 //        config.property(JspMvcFeature.TEMPLATE_BASE_PATH, "templates/jsp");
 //        config.register(JspMvcFeature.class);
+        //https://www.baeldung.com/jersey-mvc
         config.property(FreemarkerMvcFeature.TEMPLATE_BASE_PATH, "templates/jsp");
         config.register(FreemarkerMvcFeature.class);
         LOGGER.info(">>>JspMvcFeature<<<");
